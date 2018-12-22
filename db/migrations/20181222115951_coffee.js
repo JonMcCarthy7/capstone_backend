@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.string("origin");
     table.string("shop");
     table.string("region");
+    table.string("altitude");
     table.string("processing_method");
     table.string("varietal");
     table.text("notes");
