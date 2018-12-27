@@ -1,8 +1,7 @@
 const users = require("../controllers/users_controller");
 
 const verifyToken = require("./verifyToken");
-const jwt = require("jsonwebtoken");
-const secret = process.env.JWT_SECRET || "secret";
+
 
 module.exports = function(app) {
   app.post("/users", users.create);

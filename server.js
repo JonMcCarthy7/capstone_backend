@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 8000;
 const cors = require("cors");
-const corsWhitelist = ["http://localhost:3000"];
+const corsWhitelist = ["http://localhost:8080"];
 let corsOptions = {
   origin: (origin, callback) => {
     if (corsWhitelist.indexOf(origin) !== -1) {

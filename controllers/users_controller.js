@@ -9,6 +9,7 @@ module.exports = {
       knex("users")
         .insert(
           {
+            username: user.username,
             email: user.email,
             password: user.password
           },
