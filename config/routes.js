@@ -13,10 +13,7 @@ module.exports = function(app) {
   // COFFEE
   app.post("/coffee", coffee.create);
   app.get("/users/:users_id/coffee", coffee.index);
-
-  //Users
-  // app.get("/users", users.index);
-  // app.get("/users/:id", users.show);
-  // app.put("/users/:id", users.update);
-  // app.delete("/users/:id", users.delete);
+  app.get("/users/:users_id/coffee/:coffee_id", coffee.show);
+  app.put("/users/:users_id/coffee/:coffee_id", coffee.update);
+  app.delete("/users/:users_id/coffee/:coffee_id", coffee.delete);
 };
