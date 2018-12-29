@@ -1,6 +1,8 @@
 const users = require("../controllers/users_controller");
 const coffee = require("../controllers/coffee_controller");
 const tastingNotes = require("../controllers/tasting_notes_controller");
+const tastings = require("../controllers/tastings_controller");
+const tastingTastingNotes = require("../controllers/tasting_tasting_notes_controller");
 
 const verifyToken = require("./verifyToken");
 
@@ -18,6 +20,10 @@ module.exports = function(app) {
   app.put("/users/:users_id/coffee/:coffee_id", coffee.update);
   app.delete("/users/:users_id/coffee/:coffee_id", coffee.delete);
 
+  // TASTING NOTES
   app.get("/tasting_notes", tastingNotes.index);
-  app.post("/users/:users_id/coffee/:coffee_id/tasting_notes", tastingNotes.index);
+  app.post("/tastings_tasting_notes/:tasting_id", tastingTastingNotes.create);
+  // TASTINGS
+  app.get("/users/:users_id/coffee/:coffee_id/tastings", tastings.index);
+  app.post("/users/:users_id/coffee/:coffee_id/tastings", tastings.create);
 };

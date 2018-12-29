@@ -1,11 +1,16 @@
 const knex = require("../db/knex.js");
 // tastings_id: req.body.tastings_id,
 //   tasting_notes_id: req.body.tasting_notes_id
+
 module.exports = {
   create: (req, res) => {
     console.log(req.body);
+    let arr = [];
+    arr = req.body.map(el => {
+      return { tastings_id: req.params.tasting_id, tasting_notes_id: el };
+    });
     knex("tastings_tasting_notes")
-      .insert([req.body])
+      .insert(arr)
       .returning("*")
       .then(results => {
         res.json({

@@ -1,15 +1,26 @@
 const knex = require("../db/knex.js");
-// tastings_id: req.body.tastings_id,
-//   tasting_notes_id: req.body.tasting_notes_id
+
 module.exports = {
   create: (req, res) => {
-    console.log(req.body);
-    knex("tastings_tasting_notes")
-      .insert([req.body])
-      .returning("*")
+    knex("tastings")
+      .insert({
+        users_id: req.params.users_id,
+        coffee_id: req.params.coffee_id,
+        brew_method: req.body.brew_method,
+        body: req.body.body,
+        acidity: req.body.acidity,
+        sweetness: req.body.sweetness,
+        smoothness: req.body.smoothness,
+        rating: req.body.rating,
+        favorite: req.body.favorite,
+        tasting_date: req.body.tasting_date,
+        roasting_profile: req.body.roasting_profile,
+        description: req.body.description
+      })
+      .returning("id")
       .then(results => {
         res.json({
-          results
+          id: results
         });
       })
       .catch(err => {
@@ -17,7 +28,10 @@ module.exports = {
       });
   },
   index: (req, res) => {
-    knex("tasting_notes")
+    knex("tastings")
+      .where("users_id", req.params.users_id)
+      .andWhere("coffee_id", req.params.coffee_id)
+      .join("tasting_notes", tastings)
       .then(results => {
         res.json(results);
       })
