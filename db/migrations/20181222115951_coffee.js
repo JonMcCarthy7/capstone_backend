@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
     table.string("altitude");
     table.string("processing_method");
     table.string("varietal");
+    table.boolean("favorite");
     table.text("notes");
     table.boolean("has_shop");
     table.timestamps(true, true);
