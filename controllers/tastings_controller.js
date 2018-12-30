@@ -28,22 +28,36 @@ module.exports = {
       });
   },
   index: (req, res) => {
-    knex("tastings")
+    knex("tastings as t")
       .where("users_id", req.params.users_id)
       .andWhere("coffee_id", req.params.coffee_id)
-      .join("tasting_notes", tastings)
+      // .join("tastings_tasting_notes as ttn", {
+      //   "ttn.tastings_id": "t.id"
+      // })
+      // .join("tasting_notes as tn", { "tn.id": "ttn.tasting_notes_id" })
       .then(results => {
         res.json(results);
       })
       .catch(err => {
+        console.log(err);
         res.status(400).send({ message: err });
       });
   },
   show: (req, res) => {
-    knex("coffee")
-      .where("coffee.id", req.params.coffee_id)
-      .then(results => {
-        res.json(results);
+    knex("tastings as t")
+      .where("id", req.params.tastings_id)
+      .then(tastings => {
+        // res.json(tastings);
+        knex("tastings_tasting_notes as ttn")
+          .join("tasting_notes", { "ttn.tasting_notes_id": "tasting_notes.id" })
+          .where("ttn.tastings_id", tastings[0].id)
+          .then(notes => {
+            res.json({ tastings, notes });
+          });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(400).send({ message: err });
       });
   },
   update: (req, res) => {
