@@ -31,6 +31,7 @@ module.exports = {
     knex("tastings as t")
       .where("users_id", req.params.users_id)
       .andWhere("coffee_id", req.params.coffee_id)
+      .orderBy("created_at", "desc")
       // .join("tastings_tasting_notes as ttn", {
       //   "ttn.tastings_id": "t.id"
       // })
