@@ -22,12 +22,21 @@ module.exports = function(app) {
 
   // TASTING NOTES
   app.get("/tasting_notes", tastingNotes.index);
-  app.post("/tastings_tasting_notes/:tasting_id", tastingTastingNotes.create);
+  app.get("/tastings_tasting_notes/:tastings_id", tastingTastingNotes.show);
+  app.post("/tastings_tasting_notes/:tastings_id", tastingTastingNotes.create);
+  app.delete(
+    "/tastings_tasting_notes/:tastings_id",
+    tastingTastingNotes.delete
+  );
   // TASTINGS
   app.get("/users/:users_id/coffee/:coffee_id/tastings", tastings.index);
   app.post("/users/:users_id/coffee/:coffee_id/tastings", tastings.create);
   app.get(
     "/users/:users_id/coffee/:coffee_id/tastings/:tastings_id",
     tastings.show
+  );
+  app.put(
+    "/users/:users_id/coffee/:coffee_id/tastings/:tastings_id",
+    tastings.update
   );
 };

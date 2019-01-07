@@ -57,6 +57,9 @@ module.exports = {
           .join("tasting_notes", { "ttn.tasting_notes_id": "tasting_notes.id" })
           .where("ttn.tastings_id", tasting[0].id)
           .then(notes => {
+            // let newNotes = notes.map(el => el.id);
+            // console.log(newNotes);
+
             res.json({ tasting, notes });
           });
       })
@@ -66,30 +69,37 @@ module.exports = {
       });
   },
   update: (req, res) => {
-    knex("coffee")
-      .where("coffee.id", req.params.coffee_id)
+    knex("tastings")
+      .where("id", req.params.tastings_id)
       .update({
-        users_id: req.body.users_id,
-        coffee_name: req.body.coffee_name,
-        origin: req.body.origin,
-        shop: req.body.shop,
-        region: req.body.region,
-        altitude: req.body.altitude,
-        processing_method: req.body.processing_method,
-        varietal: req.body.varietal,
-        notes: req.body.notes
+        users_id: req.params.users_id,
+        coffee_id: req.params.coffee_id,
+        brew_method: req.body.brew_method,
+        body: req.body.body,
+        acidity: req.body.acidity,
+        sweetness: req.body.sweetness,
+        smoothness: req.body.smoothness,
+        rating: req.body.rating,
+        favorite: req.body.favorite,
+        tasting_date: req.body.tasting_date,
+        roasting_profile: req.body.roasting_profile,
+        description: req.body.description
       })
       .returning("*")
       .then(results => {
         res.status(200).send(results);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(400).send({ message: err });
       });
   },
   delete: (req, res) => {
-    knex("coffee")
-      .where("coffee.id", req.params.coffee_id)
+    knex("tastings")
+      .where("id", req.params.tastings_id)
       .del()
       .then(results => {
-        res.status(200).send("Coffee Successfully Deleted");
+        res.status(200).send("Tasting Successfully Deleted");
       });
   }
 };

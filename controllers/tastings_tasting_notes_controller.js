@@ -7,7 +7,7 @@ module.exports = {
     console.log(req.body);
     let arr = [];
     arr = req.body.map(el => {
-      return { tastings_id: req.params.tasting_id, tasting_notes_id: el };
+      return { tastings_id: req.params.tastings_id, tasting_notes_id: el };
     });
     knex("tastings_tasting_notes")
       .insert(arr)
@@ -31,14 +31,14 @@ module.exports = {
       });
   },
   show: (req, res) => {
-    knex("coffee")
-      .where("coffee.id", req.params.coffee_id)
+    knex("tastings_tasting_notes")
+      .where("tastings_id", req.params.tastings_id)
       .then(results => {
         res.json(results);
       });
   },
   update: (req, res) => {
-    knex("coffee")
+    knex("tastings_tasting_notes")
       .where("coffee.id", req.params.coffee_id)
       .update({
         users_id: req.body.users_id,
@@ -57,11 +57,11 @@ module.exports = {
       });
   },
   delete: (req, res) => {
-    knex("coffee")
-      .where("coffee.id", req.params.coffee_id)
+    knex("tastings_tasting_notes")
+      .where("tastings_id", req.params.tastings_id)
       .del()
       .then(results => {
-        res.status(200).send("Coffee Successfully Deleted");
+        res.status(200).send("Tastings tasting notes Successfully Deleted");
       });
   }
 };
