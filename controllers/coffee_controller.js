@@ -63,7 +63,7 @@ module.exports = {
   },
   delete: (req, res) => {
     knex("coffee")
-      .where("coffee.id", req.params.coffee_id)
+      .where("id", req.params.coffee_id)
       .del()
       .then(results => {
         res.status(200).send("Coffee Successfully Deleted");

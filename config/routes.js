@@ -39,4 +39,8 @@ module.exports = function(app) {
     "/users/:users_id/coffee/:coffee_id/tastings/:tastings_id",
     tastings.update
   );
+  app.delete(
+    "/users/:users_id/coffee/:coffee_id/tastings/:tastings_id",
+    tastings.delete
+  );
 };
