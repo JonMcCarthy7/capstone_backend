@@ -52,6 +52,7 @@ module.exports = {
         shop: req.body.shop,
         region: req.body.region,
         altitude: req.body.altitude,
+        favorite: req.body.favorite,
         processing_method: req.body.processing_method,
         varietal: req.body.varietal,
         notes: req.body.notes

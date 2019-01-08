@@ -1,7 +1,10 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("coffee", table => {
     table.increments().primary();
-    table.integer("users_id").references("users.id");
+    table
+      .integer("users_id")
+      .references("users.id")
+      .onDelete("CASCADE");
     table.string("coffee_name");
     table.string("origin");
     table.string("shop");
