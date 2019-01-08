@@ -14,7 +14,7 @@ module.exports = function(app) {
   app.get("/user", users.verify);
 
   // COFFEE
-  app.post("/coffee", coffee.create);
+  app.post("/users/:users_id/coffee", coffee.create);
   app.get("/users/:users_id/coffee", coffee.index);
   app.get("/users/:users_id/coffee/:coffee_id", coffee.show);
   app.put("/users/:users_id/coffee/:coffee_id", coffee.update);
