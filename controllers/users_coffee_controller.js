@@ -26,6 +26,7 @@ module.exports = {
   },
   index: (req, res) => {
     knex("coffee")
+      .where("users_id", req.params.users_id)
       .orderBy("created_at", "desc")
       .then(results => {
         res.json(results);
