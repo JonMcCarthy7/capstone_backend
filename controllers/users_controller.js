@@ -4,6 +4,15 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET || "secret";
 
 module.exports = {
+  index: (req, res) => {
+    knex("users")
+      .then(results => {
+        res.json(results);
+      })
+      .catch(err => {
+        res.status(500).send({ message: err });
+      });
+  },
   create: (req, res) => {
     hasher.hash(req.body).then(user => {
       knex("users")
