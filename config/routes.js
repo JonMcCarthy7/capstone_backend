@@ -14,6 +14,9 @@ module.exports = function(app) {
   app.use(verifyToken);
   app.get("/user", users.verify);
 
+  // USERS
+  app.get("/users", users.index);
+
   // USERS COFFEE
   app.post("/users/:users_id/coffee", users_coffee.create);
   app.get("/users/:users_id/coffee", users_coffee.index);
